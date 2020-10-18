@@ -1,0 +1,119 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package juegoahorcado;
+
+import java.util.Random;
+import java.util.Scanner;
+
+/**
+ *
+ * @author hp
+ */
+public class Metdodo {
+    public void Juego(){
+        Scanner teclado = new Scanner(System.in);
+
+        int Intentos_Totales= 3, Intentos = 3, Ganados = 0;
+
+        boolean VD = true, w = true;
+
+        int rep = 0;
+               
+        String frace = "esto es halloween";
+        String letra[] = new String[5];
+
+        String[] letras = frace.split("");
+
+        String intento
+                [] = new String[letras.length];
+
+        String ingresadas[] = new String[letras.length];
+
+        Ganados = letras.length - 1;
+
+        for (int i = 0; i < letras.length; i++) {
+            if (letras[i].equals(" ")) {
+                intento[i] = "  ";
+            } else {
+                intento[i] = "_ ";
+            }
+        }
+
+        while (Intentos_Totales > 0) {
+
+            System.out.println("Ingrese letra");
+
+            for (int i = 0; i < letras.length; i++) {
+                System.out.print(intento[i]);
+
+            }
+
+            System.out.println("");
+
+            letra[0] = teclado.nextLine();
+             if (letra[0].equals("")) {
+                        VD = false;
+                    }
+            rep = 0;
+            boolean aviso = true;
+
+            for (int i = 0; i < letras.length; i++) {
+
+                w = true;
+
+                if (letras[i].equals(letra[0])) {
+
+                   
+                    if (!intento[i].equals(letra[0])) {
+
+                        intento[i] = letra[0];
+
+                        VD = false;
+
+                        rep++;
+                        ingresadas[i] = letras[0];
+
+                    } else {
+                        aviso = false;
+                        VD = false;
+                    }
+
+                }
+
+            }
+
+            if (aviso == false) {
+
+                System.out.println(" Aviso: Ya ingresaste esa letra ");
+
+            }
+
+            aviso = true;
+
+            if (VD == true) {
+                Intentos_Totales--;
+
+            } else {
+                Ganados = Ganados - rep;
+            }
+
+            if (Intentos_Totales < Intentos) {
+                System.out.println(" \nQuedan: " + Intentos_Totales + " Intentos");
+                Intentos--;
+            }
+
+            if (Intentos_Totales == 0) {
+                System.out.println("\nLastima Perdiste\nLa frace es: " + frace);
+            }
+            if (Ganados <= 2) {
+                System.out.println(frace + "\nFelicidades ganaste, Bien echo.");
+                Intentos_Totales = 0;
+            }
+            VD = true;
+            rep = 0;
+        }
+    }
+}
